@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Commerce Keyword Lab",
+  title: "Privacy Policy",
   description:
     "Privacy Policy for Commerce Keyword Lab: what Google Ads API data we access, store, share, retain and delete.",
 };
 
-const OPERATOR = "YOUR FULL NAME OR BUSINESS NAME";
 const CONTACT_EMAIL = "forandomlogin@gmail.com";
 const HOSTING = "Vercel";
 const SITE_URL = "https://keywordlab.opendraw.live";
@@ -27,7 +27,8 @@ export default function PrivacyPage() {
 
       <p>
         Commerce Keyword Lab (&quot;the App&quot;, &quot;we&quot;,
-        &quot;us&quot;) is operated by {OPERATOR} and is available at{" "}
+        &quot;us&quot;) is operated by the business identified in the Contact
+        section below and is available at{" "}
         <a href={SITE_URL} className={link}>
           {SITE_URL}
         </a>
@@ -52,23 +53,37 @@ export default function PrivacyPage() {
       </section>
 
       <section className="space-y-3">
+        <h2 className={h2}>Sign-in information</h2>
+        <p>
+          When you sign in with Google, we receive your name, email address and
+          profile picture URL (scopes{" "}
+          <code className={code}>openid</code>,{" "}
+          <code className={code}>email</code>,{" "}
+          <code className={code}>profile</code>) only to authenticate you. They
+          are kept in a signed session cookie and are not shared or used for
+          anything else.
+        </p>
+      </section>
+
+      <section className="space-y-3">
         <h2 className={h2}>Google API access and scope</h2>
         <p>
-          To fetch keyword data, the App requests the Google Ads API scope{" "}
+          To fetch keyword data, the App uses the Google Ads API scope{" "}
           <code className={code}>https://www.googleapis.com/auth/adwords</code>.
-          This access is used strictly in a read-only manner to retrieve Google
+          This access is held by the operator as a server-side credential: users
+          of the App do not grant access to their own Google Ads accounts. The
+          access is used strictly in a read-only manner to retrieve Google
           Keyword Planner data (search volumes, competition metrics, and related
           keyword ideas). Commerce Keyword Lab does not create, modify, pause,
-          or delete campaigns, ad groups, ads, keywords, bids, or budgets in
-          your Google Ads account. Even though the scope technically permits
-          broader access, our application code is written to only call the read
-          endpoints required for Keyword Planner data, and we do not use the
-          scope for any other purpose.
+          or delete campaigns, ad groups, ads, keywords, bids, or budgets. Even
+          though the scope technically permits broader access, our application
+          code is written to only call the read endpoints required for Keyword
+          Planner data, and we do not use the scope for any other purpose.
         </p>
         <p>
-          Authentication is handled through Google&apos;s official OAuth 2.0
-          flow. We never see or store your Google password, and access tokens
-          are kept on the server only.
+          Sign-in is handled through Google&apos;s official OAuth 2.0 flow. We
+          never see or store your Google password, and all Google Ads API
+          credentials are kept on the server only.
         </p>
       </section>
 
@@ -85,8 +100,8 @@ export default function PrivacyPage() {
             index, and top-of-page bid ranges.
           </li>
           <li>
-            The Google Ads customer ID and manager account ID needed to send
-            these requests.
+            The operator&apos;s Google Ads customer ID and manager account ID
+            needed to send these requests.
           </li>
         </ul>
         <p>
@@ -102,6 +117,10 @@ export default function PrivacyPage() {
           <li>
             Cached keyword results from the Google Ads API, stored temporarily
             to improve performance and reduce redundant API calls.
+          </li>
+          <li>
+            Your sign-in profile (name, email address and profile picture URL)
+            in a signed session cookie when you sign in with Google.
           </li>
           <li>
             Server-side credentials needed to connect to the Google Ads API,
@@ -167,7 +186,7 @@ export default function PrivacyPage() {
         <h2 className={h2}>Data retention and deletion</h2>
         <ul className="list-disc list-inside space-y-2">
           <li>
-            Cached keyword results are deleted automatically after 30 days.
+            Cached keyword results are deleted automatically after 3 days.
           </li>
           <li>
             Searched keywords and exported files are kept until you ask us to
@@ -187,8 +206,9 @@ export default function PrivacyPage() {
       <section className="space-y-3">
         <h2 className={h2}>Revoking access</h2>
         <p>
-          You can revoke Commerce Keyword Lab&apos;s access to your Google
-          account at any time at{" "}
+          When you sign in with Google, you connect your Google account for
+          sign-in only (scopes openid, email, profile). You can revoke that
+          access at any time at{" "}
           <a
             href="https://myaccount.google.com/permissions"
             target="_blank"
@@ -197,8 +217,9 @@ export default function PrivacyPage() {
           >
             https://myaccount.google.com/permissions
           </a>
-          . Revoking access stops the App from making any further requests on
-          your behalf, and we will delete any stored credentials for your
+          . Revoking it stops the App from recognizing your account for sign-in.
+          The Google Ads API access described above is a server-side credential
+          held by the operator and is not linked to your personal Google
           account.
         </p>
       </section>
@@ -247,8 +268,6 @@ export default function PrivacyPage() {
       <section className="space-y-3">
         <h2 className={h2}>Contact</h2>
         <p>
-          {OPERATOR}
-          <br />
           Email:{" "}
           <a href={`mailto:${CONTACT_EMAIL}`} className={link}>
             {CONTACT_EMAIL}
@@ -260,9 +279,9 @@ export default function PrivacyPage() {
           </a>
         </p>
         <p>
-          <a href="/" className={link}>
+          <Link href="/" className={link}>
             ← Back to Commerce Keyword Lab
-          </a>
+          </Link>
         </p>
       </section>
     </main>
