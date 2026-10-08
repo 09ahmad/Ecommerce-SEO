@@ -1,7 +1,13 @@
 "use client";
 
 import type { KeywordRow } from "@/lib/keyword-rows";
-import { competitionBadge, fmtGrowth, fmtInt, fmtMoney, type SortableKey } from "./format";
+import {
+  competitionBadge,
+  fmtGrowth,
+  fmtInt,
+  fmtMoney,
+  type SortableKey,
+} from "./format";
 import Sparkline from "./sparkline";
 
 const PAGE_SIZE = 25;
@@ -38,7 +44,10 @@ function SkeletonRows() {
       {[0, 1, 2, 3, 4].map((i) => (
         <tr key={i}>
           {Array.from({ length: COLUMNS.length + 3 }).map((_, j) => (
-            <td key={j} className="border-b border-black/[.06] px-3 py-3 dark:border-white/[.1]">
+            <td
+              key={j}
+              className="border-b border-black/[.06] px-3 py-3 dark:border-white/[.1]"
+            >
               <div
                 className="h-4 animate-pulse rounded bg-black/[.08] dark:bg-white/[.12]"
                 style={{ width: `${45 + ((i * 17 + j * 31) % 45)}%` }}
@@ -92,7 +101,7 @@ export default function ResultsTable({
             id="tag-filter"
             value={tagFilter}
             onChange={(e) => onTagFilterChange(e.target.value)}
-            className="rounded-lg border border-black/[.15] bg-transparent px-2 py-1.5 text-sm text-zinc-900 outline-none focus:border-zinc-500 dark:border-white/[.2] dark:text-zinc-100 dark:focus:border-zinc-400"
+            className="rounded-lg border border-black/[.15] bg-transparent px-2 py-1.5 text-sm text-zinc-900 outline-none focus:border-zinc-500 dark:border-white/[.2] dark:text-zinc-500 dark:focus:border-zinc-400"
           >
             <option value="">All tags</option>
             {availableTags.map((t) => (
@@ -115,7 +124,13 @@ export default function ResultsTable({
                 <th
                   key={c.key}
                   scope="col"
-                  aria-sort={sortKey === c.key ? (sortDir === "asc" ? "ascending" : "descending") : "none"}
+                  aria-sort={
+                    sortKey === c.key
+                      ? sortDir === "asc"
+                        ? "ascending"
+                        : "descending"
+                      : "none"
+                  }
                   className={`border-b border-black/[.08] px-3 py-2.5 font-medium whitespace-nowrap dark:border-white/[.14] ${c.numeric ? "text-right" : ""}`}
                 >
                   <button
@@ -130,13 +145,22 @@ export default function ResultsTable({
                   </button>
                 </th>
               ))}
-              <th scope="col" className="border-b border-black/[.08] px-3 py-2.5 font-medium dark:border-white/[.14]">
+              <th
+                scope="col"
+                className="border-b border-black/[.08] px-3 py-2.5 font-medium dark:border-white/[.14]"
+              >
                 12-month trend
               </th>
-              <th scope="col" className="border-b border-black/[.08] px-3 py-2.5 font-medium dark:border-white/[.14]">
+              <th
+                scope="col"
+                className="border-b border-black/[.08] px-3 py-2.5 font-medium dark:border-white/[.14]"
+              >
                 Tags
               </th>
-              <th scope="col" className="border-b border-black/[.08] px-3 py-2.5 font-medium dark:border-white/[.14]">
+              <th
+                scope="col"
+                className="border-b border-black/[.08] px-3 py-2.5 font-medium dark:border-white/[.14]"
+              >
                 Source
               </th>
             </tr>
@@ -180,11 +204,15 @@ export default function ResultsTable({
                     {fmtGrowth(r.growthPercent)}
                   </td>
                   <td className="border-b border-black/[.06] px-3 py-2.5 dark:border-white/[.1]">
-                    <Sparkline volumes={r.monthlySearchVolumes.map((m) => m.searches)} />
+                    <Sparkline
+                      volumes={r.monthlySearchVolumes.map((m) => m.searches)}
+                    />
                   </td>
                   <td className="border-b border-black/[.06] px-3 py-2.5 dark:border-white/[.1]">
                     {r.tags.length === 0 ? (
-                      <span className="text-zinc-400 dark:text-zinc-500">—</span>
+                      <span className="text-zinc-400 dark:text-zinc-500">
+                        —
+                      </span>
                     ) : (
                       <span className="flex flex-wrap gap-1">
                         {r.tags.map((t) => (
